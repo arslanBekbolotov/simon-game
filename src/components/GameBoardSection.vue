@@ -1,5 +1,6 @@
 <template>
   <div
+    @click="clicked"
     class="section"
     :class="[section.active && 'active', section.color]"
   ></div>
@@ -14,6 +15,41 @@ export default {
     },
     status: {
       type: String,
+      required: true,
+    },
+  },
+  computed: {
+    id() {
+      return this.section.id;
+    },
+    isActive() {
+      return this.section.active;
+    },
+  },
+  watch: {
+    isActive(val) {
+      if (val === true) this.play();
+    },
+  },
+  methods: {
+    clicked() {
+      if (this.status !== "play") return;
+      this.$emit("section-clicked", this.id);
+      this.$emit("change-activity", this.id, true);
+      this.play();
+    },
+    play() {
+      this.playAudio();
+      setTimeout(() => {
+        this.$emit("change-activity", this.id, false);
+      }, 200);
+    },
+    playAudio() {
+      const name = this.id + 1;
+      const audio = new Audio(`sounds/${name}.ogg`);
+      audio.addEventListener("canplaythrough", () => {
+        audio.play();
+      });
     },
   },
 };
