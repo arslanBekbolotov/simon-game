@@ -1,28 +1,39 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <game-options :options="options" v-model="difficulty" />
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import GameOptions from "@/components/GameOptions.vue";
 
 export default {
   name: "App",
-  components: {
-    HelloWorld,
-  },
+  components: { GameOptions },
+  data: () => ({
+    status: "disabled",
+    round: 0,
+    lastRound: 0,
+    difficulty: 1500,
+    options: [
+      {
+        label: "Легкий",
+        name: "easy",
+        value: 1500,
+      },
+      {
+        label: "Средний",
+        name: "medium",
+        value: 1000,
+      },
+      {
+        label: "Сложный",
+        name: "hard",
+        value: 400,
+      },
+    ],
+  }),
 };
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style lang="scss"></style>
