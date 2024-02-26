@@ -1,6 +1,6 @@
 <template>
   <div class="game-options">
-    <h2>Уровень сложности:</h2>
+    <h2 class="game-options__title">Уровень сложности:</h2>
     <div
       class="game-options__item"
       v-for="option in options"
@@ -27,14 +27,21 @@ export default {
       required: true,
     },
   },
-  data: () => {},
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .game-options {
   display: flex;
   flex-direction: column;
   align-items: baseline;
   margin-top: 20px;
+
+  &__title {
+    margin-top: 30px;
+  }
+
+  &__radio {
+    margin-bottom: 10px;
+  }
 }
 </style>

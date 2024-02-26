@@ -1,19 +1,28 @@
 <template>
   <div id="app">
-    <game-options :options="options" v-model="difficulty" />
+    <h2>Simon Game</h2>
+    <div>
+      <game-board
+        :status.sync="status"
+        :difficulty="difficulty"
+        :round="round"
+        @tile-clicked="tileClicked"
+      />
+      <game-options :options="options" v-model="difficulty" />
+    </div>
   </div>
 </template>
 
 <script>
 import GameOptions from "@/components/GameOptions.vue";
+import GameBoard from "@/components/GameBoard.vue";
 
 export default {
   name: "App",
-  components: { GameOptions },
+  components: { GameBoard, GameOptions },
   data: () => ({
     status: "disabled",
     round: 0,
-    lastRound: 0,
     difficulty: 1500,
     options: [
       {
@@ -33,6 +42,9 @@ export default {
       },
     ],
   }),
+  methods: {
+    tileClicked() {},
+  },
 };
 </script>
 
